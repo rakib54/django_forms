@@ -8,8 +8,11 @@ def home(request):
 
 
 def about(request):
+
     return render(request, 'first_app/about.html')
 
 
 def form(request):
+    if request.method == 'POST':
+        print("Hello: ", request.POST)
     return render(request, 'first_app/form.html')

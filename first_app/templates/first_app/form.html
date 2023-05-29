@@ -2,19 +2,26 @@
 {% block title %}Form{%endblock%}
 {% block content %}
 <div style="width: 50%; margin: auto">
-  <h3>Ratings</h3>
-  <form>
+  <h3>Course Feedback</h3>
+  <form method="post" action="">
+    {% csrf_token %}
     <div class="form-group">
       <label for="exampleInputPassword1">Name</label>
-      <input type="Name" class="form-control" id="Name" placeholder="Name">
+      <input type="Name" class="form-control" id="Name" placeholder="Name" name="username">
     </div>
     <div class="form-group">
       <label for="exampleInputEmail1">Email address</label>
       <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-        placeholder="Enter email">
+        placeholder="Enter email" name="email">
     </div>
+    <select class="form-select">
+      <option selected>Give ratings</option>
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+    </select>
 
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <button type="submit" class="btn btn-primary mt-2">Submit</button>
   </form>
 </div>
 {%endblock%}
