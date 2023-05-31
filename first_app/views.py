@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from . forms import contactForm, Student_Data
+from . forms import contactForm, Student_Data, passwordValidation
 
 # Create your views here.
 
@@ -25,7 +25,7 @@ def form(request):
 
 def django_forms(request):
     if (request.method == 'POST'):
-        form = Student_Data(request.POST, request.FILES)  # for file uploads
+        form = contactForm(request.POST, request.FILES)  # for file uploads
         if form.is_valid():  # check if form is valid
             # file = form.cleaned_data['file']
             # with open('./first_app/uploads/' + file.name, 'wb+') as destination:
@@ -34,5 +34,27 @@ def django_forms(request):
             print(form.cleaned_data)
             return render(request, 'first_app/django_form.html', {"form": form})
     else:
+        form = contactForm()
+    return render(request, 'first_app/django_form.html', {"form": form})
+
+
+def Students_form(request):
+    if (request.method == 'POST'):
+        form = Student_Data(request.POST, request.FILES)
+        if form.is_valid():
+            print(form.cleaned_data)
+            return render(request, 'first_app/django_form.html', {"form": form})
+    else:
         form = Student_Data()
+    return render(request, 'first_app/django_form.html', {"form": form})
+
+
+def password_validation(request):
+    if (request.method == 'POST'):
+        form = passwordValidation(request.POST, request.FILES)
+        if form.is_valid():
+            print(form.cleaned_data)
+            return render(request, 'first_app/django_form.html', {"form": form})
+    else:
+        form = passwordValidation()
     return render(request, 'first_app/django_form.html', {"form": form})

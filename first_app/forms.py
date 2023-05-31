@@ -30,3 +30,16 @@ class Student_Data(forms.Form):
     email = forms.CharField(widget=forms.EmailInput,
                             validators=[validators.EmailValidator(message='Enter a valid email')])
     text = forms.CharField(widget=forms.TextInput(), validators=[len_check])
+
+
+class passwordValidation(forms.Form):
+    name = forms.CharField(widget=forms.TextInput)
+    password = forms.CharField(widget=forms.PasswordInput)
+    confirm_password = forms.CharField(widget=forms.PasswordInput)
+
+    def clean(self):
+        # cleaned_data = super().clean()
+        val_pass = self.cleaned_data['password']
+        val_confirm_pass = self.cleaned_data['confirm_password']
+        if val_pass != val_confirm_pass:
+            raise forms.ValidationError('Password does not match')
